@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rkd.audiobasics",
+      "sha256_cert_fingerprints": [
+        "66:A4:4E:28:0E:B4:32:12:AC:A1:F9:5E:70:F9:24:A0:90:65:67:05:94:42:24:8A:FA:54:1E:9A:EB:92:35:95"
+      ]
+    }
+  }
+]
