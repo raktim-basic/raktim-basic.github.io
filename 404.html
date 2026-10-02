@@ -150,22 +150,28 @@
 
   <script>
     // This file is GitHub Pages' catch-all for any URL that isn't a real file — it doubles as
-    // both the Audiobasics smart-link router (for /l/song/<id> and /l/album/<id>) and the
+    // both the Audiobasics smart-link router (for /l/song/<id>, /l/album/<id> and /l/artist/<id>) and the
     // site's normal 404 page for everything else. Real pages/files on the site are served
     // directly by GitHub Pages and never reach this script at all.
     (function () {
       var segments = window.location.pathname.split('/').filter(Boolean);
       var isLinkPath = segments[0] === 'l' && segments.length >= 3 &&
-        (segments[1] === 'song' || segments[1] === 'album');
+        (segments[1] === 'song' || segments[1] === 'album' || segments[1] === 'artist');
 
       if (isLinkPath) {
         var type = segments[1];
         var id = segments[2];
         var link = document.getElementById('ytLink');
 
-        link.href = type === 'song'
-          ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(id)
-          : 'https://www.youtube.com/playlist?list=' + encodeURIComponent(id);
+        if (type === 'song') {
+          link.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
+        } else if (type === 'album') {
+          link.href = 'https://www.youtube.com/playlist?list=' + encodeURIComponent(id);
+        } else {
+          // Artist: the id is the artist's channel id, which YouTube Music opens directly.
+          link.href = 'https://music.youtube.com/channel/' + encodeURIComponent(id);
+          link.textContent = 'Open in YouTube Music';
+        }
 
         document.getElementById('linkCard').hidden = false;
       } else {
